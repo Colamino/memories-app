@@ -7,9 +7,11 @@ function Posts({ setCurrentId, setupdateCode }) {
   const { postsItem, isLoading } = useSelector((state) => state.posts);
   const posts = postsItem?.posts;
 
-  if (!posts.length && !isLoading) return "No posts";
+  console.log(postsItem);
 
-  return !posts.length ? (
+  if (!posts?.length && !isLoading) return "No posts";
+
+  return isLoading ? (
     <CircularProgress />
   ) : (
     // <CircularProgress size={"100px"} />

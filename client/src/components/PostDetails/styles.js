@@ -42,10 +42,16 @@ export const RecommendedPosts = styled("div")(({ theme }) => ({
 export const CommentsOuterContainer = styled("div")(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+  },
 }));
 
 export const CommentsInnerContainer = styled("div")(({ theme }) => ({
   height: "200px",
   overflowY: "auto",
   marginRight: "30px",
+  [theme.breakpoints.down("sm")]: {
+    marginRight: "0",
+  },
 }));

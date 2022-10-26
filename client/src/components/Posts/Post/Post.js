@@ -28,17 +28,16 @@ function Post({ post, setCurrentId, setupdateCode }) {
   const navigate = useNavigate();
 
   const userId = user?.userInfo?.id || user?.result?._id;
-  const hasLikedPost = post?.likes?.find((id) => id === userId);
+  const hasLikedPost = likes?.find((id) => id === userId);
 
-  const handleLike = async () => {
+  const handleLike = () => {
     if (hasLikedPost) {
       setLikes(post?.likes?.filter((id) => id !== userId));
     } else {
-      setLikes([...post?.likes, userId]);
+      setLikes((prev) => [...prev, userId]);
     }
 
-    await dispatch(likePost(post?._id));
-    setupdateCode((prev) => prev + 1);
+    dispatch(likePost(post?._id));
   };
 
   const Likes = () => {
@@ -68,7 +67,7 @@ function Post({ post, setCurrentId, setupdateCode }) {
   };
 
   const openPost = () => {
-    navigate(`/posts/${post._id}`);
+    navigate(`/posts/${post?._id}`);
   };
   return (
     <StyledCard raised elevation={6}>

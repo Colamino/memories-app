@@ -55,7 +55,7 @@ export const createPost = createAsyncThunk(
     const { formData, navigate } = newData;
     try {
       const { data } = await api.createPost(formData);
-      await navigate(`/posts/${data._id}`);
+      await navigate(`/posts/${data?._id}`);
       return data;
     } catch (err) {
       console.log(err);
@@ -117,9 +117,9 @@ const postSlice = createSlice({
       // set item in empty array
       state.postsItem = {
         // ...state.postsItem,
-        posts: action.payload.data,
-        currentPage: action.payload.currentPage,
-        numberOfPages: action.payload.numberOfPages,
+        posts: action?.payload?.data,
+        currentPage: action?.payload?.currentPage,
+        numberOfPages: action?.payload?.numberOfPages,
       };
       state.isLoading = false;
     },
@@ -132,7 +132,7 @@ const postSlice = createSlice({
     },
     [getPostsBySearch.fulfilled]: (state, action) => {
       // set item in empty array
-      state.postsItem.posts = action.payload;
+      state.postsItem.posts = action?.payload;
       state.isLoading = false;
     },
     [getPostsBySearch.rejected]: (state) => {
@@ -154,7 +154,7 @@ const postSlice = createSlice({
       state.isLoading = true;
     },
     [createPost.fulfilled]: (state, action) => {
-      state?.postsItem?.posts?.unshift(action.payload);
+      state?.postsItem?.posts?.unshift(action?.payload);
       state.isLoading = false;
     },
     [createPost.rejected]: (state) => {
@@ -165,7 +165,7 @@ const postSlice = createSlice({
     },
     [updatePost.fulfilled]: (state, action) => {
       state?.postsItem?.posts?.map((post) =>
-        post._id === action.payload._id ? action.payload : post
+        post._id === action?.payload?._id ? action?.payload : post
       );
       state.isLoading = false;
     },
@@ -176,7 +176,9 @@ const postSlice = createSlice({
       state.isLoading = true;
     },
     [deletePost.fulfilled]: (state, action) => {
-      state?.postsItem?.posts?.filter((post) => post._id !== action.payload.id);
+      state?.postsItem?.posts?.filter(
+        (post) => post?._id !== action?.payload?.id
+      );
 
       state.isLoading = false;
     },

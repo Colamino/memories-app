@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   CardDiv,
   ImageSection,
@@ -20,13 +20,15 @@ function PostDetails({ user }) {
   const { postsItem, isLoading, currentPost } = useSelector(
     (state) => state.posts
   );
+
   const [comments, setCommments] = useState(currentPost?.comments);
+
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(getPost(id));
-  }, [id, comments]);
+  }, [id, dispatch]);
 
   useEffect(() => {
     if (currentPost) {
@@ -118,6 +120,12 @@ function PostDetails({ user }) {
               "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
             }
             alt={currentPost?.title}
+            style={{
+              borderRadius: "20px",
+              objectFit: "cover",
+              width: "100%",
+              maxHeight: "600px",
+            }}
           />
         </ImageSection>
       </CardDiv>

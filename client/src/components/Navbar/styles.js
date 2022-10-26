@@ -19,6 +19,8 @@ export const StyledAppBar = styled(AppBar)(({ theme }) => ({
   padding: "10px 50px",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
+    paddingLeft: "0",
+    paddingRight: "0",
   },
 }));
 
@@ -37,19 +39,28 @@ export const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   justifyContent: "flex-end",
   width: "400px",
   [theme.breakpoints.down("sm")]: {
-    width: "auto",
+    marginLeft: "10px",
+    marginRight: "10px",
+    width: "inherit",
   },
 }));
 
 export const StyledAvatar = styled(Avatar)(({ theme }) => ({
   color: theme.palette.getContrastText(deepPurple[500]),
   backgroundColor: deepPurple[500],
+  [theme.breakpoints.down("sm")]: {
+    marginRight: "10px",
+  },
 }));
 
 export const StyledTypoGraphy = styled(Typography)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   textAlign: "center",
+  [theme.breakpoints.down("sm")]: {
+    maxWidth: "150px",
+    fontSize: "15px",
+  },
 }));
 
 export const LogoutButton = styled(Button)(({ theme }) => ({
@@ -62,7 +73,6 @@ export const Profile = styled(Button)(({ theme }) => ({
   width: "400px",
   alignItems: "center",
   [theme.breakpoints.down("sm")]: {
-    width: "auto",
     marginTop: 20,
     justifyContent: "center",
   },

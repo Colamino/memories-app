@@ -18,7 +18,7 @@ import memoriesText from "../../images/memories-Text.png";
 function Navbar({ user }) {
   const logout = () => {
     localStorage.clear();
-    window.open("http://localhost:5000/auth/logout", "_self");
+    window.open("https://memories-app-l.herokuapp.com/auth/logout", "_self");
   };
 
   useEffect(() => {

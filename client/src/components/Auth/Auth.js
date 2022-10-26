@@ -34,7 +34,7 @@ function Auth() {
   };
 
   const google = () => {
-    window.open("http://localhost:5000/auth/google", "_self");
+    window.open("https://memories-app-l.herokuapp.com/auth/google", "_self");
   };
   const handleSubmit = (e) => {
     e.preventDefault();

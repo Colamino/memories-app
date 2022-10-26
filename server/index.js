@@ -17,13 +17,6 @@ dotenv.config();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: "GET,POST,PUT,PATCH,DELETE",
-    credentials: true,
-  })
-);
 
 app.use(
   session({
@@ -39,6 +32,14 @@ app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true,
+  })
+);
+
 const CONNECTION_URL = process.env.CONNECTION_URL;
 
 mongoose
@@ -46,11 +47,15 @@ mongoose
   .then(console.log("connected to db"))
   .catch((err) => console.log(err));
 
+app.get("/", (req, res) => {
+  res.send("Hello world");
+});
+
 app.use("/posts", postRoutes);
 app.use("/auth", authRoute);
 app.use("/users", userRoutes);
 
 const server = app.listen(process.env.PORT || 5000, () => {
   const port = server.address().port;
-  console.log(`Server running on port ${port}`);
+  console.log(`Express is working on port ${port}`);
 });

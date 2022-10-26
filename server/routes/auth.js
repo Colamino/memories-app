@@ -3,11 +3,7 @@ const router = express.Router();
 import passport from "passport";
 import jwt from "jsonwebtoken";
 
-const CLIENT_URL = "http://localhost:3000/";
-
-function isLoggedIn(req, res, next) {
-  req.user ? next() : res.sendStatus(401);
-}
+const CLIENT_URL = "http://localhost:3000";
 
 //client side will come here and authenticate
 router.get(
@@ -27,12 +23,16 @@ router.get(
 );
 
 //req.user can get user data
-router.get("/login/success", isLoggedIn, (req, res) => {
+router.get("/login/success", async (req, res) => {
   const userInfo = req.user;
   if (userInfo) {
-    const token = jwt.sign({ userInfo: userInfo }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = await jwt.sign(
+      { userInfo: userInfo },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
     res.status(200).json({
       success: true,
       message: "successfull",

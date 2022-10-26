@@ -11,7 +11,7 @@ export default passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "http://localhost:5000/auth/google/memories",
+      callbackURL: "https://memories-app-l.herokuapp.com/auth/google/memories",
       passReqToCallback: true,
     },
     async function (req, accessToken, refreshToken, profile, cb) {

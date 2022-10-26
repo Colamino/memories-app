@@ -57,6 +57,17 @@ const authSlice = createSlice({
     [signup.rejected]: (state) => {
       state.isLoading = false;
     },
+    [signin.googleSignin]: (state) => {
+      state.isLoading = true;
+    },
+    [signin.googleSignin]: (state, action) => {
+      // set item in empty array
+      state.googleUser = action.payload.user;
+      state.isLoading = false;
+    },
+    [signin.googleSignin]: (state) => {
+      state.isLoading = false;
+    },
   },
 });
 

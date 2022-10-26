@@ -41,16 +41,17 @@ function App() {
             "Content-Type": "application/json",
             "Access-Control-Allow-Credentials": true,
           },
+          mode: "cors",
         })
           .then((res) => {
-            if (res.status === 200) return res.json();
+            if (res?.status === 200) return res?.json();
             throw new Error("authentication has been failed!");
           })
           .then((resObject) => {
-            setUser(resObject.user);
+            setUser(resObject?.user);
             localStorage.setItem(
               "googleProfile",
-              JSON.stringify(resObject.user)
+              JSON.stringify(resObject?.user)
             );
           });
       } catch (err) {
